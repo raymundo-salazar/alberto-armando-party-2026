@@ -769,6 +769,38 @@ input[type="tel"]:focus {
 	padding: 10px 0;
 }
 
+.rsvp-closed-box {
+	display: none;
+	text-align: center;
+	padding: 10px 0;
+}
+
+#confirmacion[data-rsvp-state="closed"] .card-title,
+#confirmacion[data-rsvp-state="closed"] .section-character,
+#confirmacion[data-rsvp-state="closed"] #form-content {
+	display: none;
+}
+
+#confirmacion[data-rsvp-state="closed"] .rsvp-closed-box {
+	display: block;
+}
+
+.rsvp-closed-card {
+	background:
+		radial-gradient(circle at 20% 10%, rgba(79, 195, 247, 0.18), transparent 35%),
+		linear-gradient(135deg, rgba(255, 215, 0, 0.16), rgba(79, 195, 247, 0.2));
+}
+
+.rsvp-closed-card .success-title {
+	color: var(--secondary);
+}
+
+.rsvp-closed-badge {
+	box-shadow:
+		0 12px 30px rgba(79, 195, 247, 0.3),
+		0 0 28px rgba(255, 215, 0, 0.2);
+}
+
 .success-card {
 	position: relative;
 	overflow: hidden;

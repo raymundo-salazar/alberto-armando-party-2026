@@ -3,6 +3,7 @@ import {
 	Baby,
 	ClipboardCheck,
 	Clock,
+	CalendarX,
 	Minus,
 	PartyPopper,
 	Phone,
@@ -10,14 +11,44 @@ import {
 	User,
 	UserRound,
 } from "@lucide/astro"
+
+const rsvpCutoffValue = import.meta.env.PUBLIC_RSVP_CUTOFF_DATE ?? "2026-07-05T00:00:00"
+const rsvpCutoff = new Date(rsvpCutoffValue)
+const rsvpClosed = Number.isNaN(rsvpCutoff.getTime()) || Date.now() >= rsvpCutoff.getTime()
 ---
 
-<section class="card" id="confirmacion">
+<section class="card" id="confirmacion" data-rsvp-state={rsvpClosed ? "closed" : "open"}>
 	<img class="section-character ghost" src="/ghost.webp" alt="Cachorro decorativo" />
 
 	<div class="card-title">
 		<ClipboardCheck class="icon" />
 		Confirma tu asistencia
+	</div>
+
+	<div class="rsvp-closed-box">
+		<div class="success-card rsvp-closed-card">
+			<div class="success-icon-badge rsvp-closed-badge">
+				<CalendarX class="icon" />
+			</div>
+
+			<div class="success-title">Confirmaciones cerradas</div>
+
+			<p class="success-message">
+				La fecha límite para confirmar asistencia ya pasó. Si ya habías enviado tu RSVP, tu
+				lugar sigue reservado.
+			</p>
+
+			<div class="success-note">
+				<Clock class="icon" />
+				Cerramos confirmaciones el {
+					rsvpCutoff.toLocaleDateString("es-MX", {
+						day: "numeric",
+						month: "long",
+						year: "numeric",
+					})
+				}
+			</div>
+		</div>
 	</div>
 
 	<div id="form-content">
