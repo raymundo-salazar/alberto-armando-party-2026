@@ -254,18 +254,21 @@ import RsvpSection from "@/components/sections/RsvpSection.astro"
 		removeFirstInteractionListeners()
 
 		try {
+			console.log("Trying to play background music with sound...")
 			bgMusic.muted = false
 
 			if (bgMusic.paused) {
+				console.log("Background music is paused, attempting to play...")
 				await bgMusic.play()
 			}
 		} catch (error) {
-			console.debug(error)
+			console.log(error) // console.debug
 			bgMusic.muted = true
 			try {
+				console.log("Retrying to play background music with mute...")
 				await bgMusic.play()
 			} catch (fallbackError) {
-				console.debug(fallbackError)
+				console.log(fallbackError) // console.debug
 			}
 		}
 
