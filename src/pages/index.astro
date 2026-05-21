@@ -246,7 +246,10 @@ import RsvpSection from "@/components/sections/RsvpSection.astro"
 	}
 
 	async function handleFirstInteraction() {
+		console.log("User interacted for the first time, attempting to play background music...")
 		if (!bgMusic) return
+
+		console.log("Removing first interaction listeners...")
 
 		removeFirstInteractionListeners()
 
