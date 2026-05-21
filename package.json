@@ -2,6 +2,11 @@
 	"name": "cachorros-web",
 	"type": "module",
 	"version": "0.0.1",
+	"author": {
+		"name": "Raymundo Salazar",
+		"email": "hola@raymundosalazar.dev",
+		"url": "https://raymundosalazar.dev"
+	},
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
