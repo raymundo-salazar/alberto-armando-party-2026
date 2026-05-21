@@ -1,0 +1,47 @@
+---
+import Analytics from "@vercel/analytics/astro"
+import SpeedInsights from "@vercel/speed-insights/astro"
+
+import "@/styles/global.css"
+
+const { pageTitle = "Fiesta de Spidey", pageDescription = "Fiesta de Spidey" } = Astro.props
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+		<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon/favicon.ico" />
+		<link rel="manifest" href="/favicon/site.webmanifest" />
+		<meta name="theme-color" content="#ffffff" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<meta name="author" content="Raymundo Salazar" />
+		<meta name="keywords" content="fiesta infantil, cachorros, Astro, invitación, evento" />
+		<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+		<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+		<meta name="language" content="es" />
+		<meta name="og:title" content={pageTitle} />
+		<meta name="og:description" content={pageDescription} />
+		<meta name="og:type" content="website" />
+		<meta name="og:url" content="/" />
+		<meta name="og:image" content="/assets/cachorros/banner-logo.webp" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+		<Analytics />
+	</head>
+	<body>
+		<div>
+			<slot />
+		</div>
+		<SpeedInsights />
+	</body>
+</html>

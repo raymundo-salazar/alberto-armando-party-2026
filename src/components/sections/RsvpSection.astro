@@ -1,0 +1,161 @@
+---
+import {
+	Baby,
+	ClipboardCheck,
+	Clock,
+	Minus,
+	PartyPopper,
+	Phone,
+	Plus,
+	User,
+	UserRound,
+} from "@lucide/astro"
+---
+
+<section class="card" id="confirmacion">
+	<img class="section-character ghost" src="/ghost.webp" alt="Cachorro decorativo" />
+
+	<div class="card-title">
+		<ClipboardCheck class="icon" />
+		Confirma tu asistencia
+	</div>
+
+	<div id="form-content">
+		<div class="form-group">
+			<label for="nombre">
+				<User class="icon" />
+				Tu nombre completo
+			</label>
+			<input type="text" id="nombre" placeholder="Ej. Gina Colin" />
+		</div>
+
+		<div class="form-group">
+			<label for="telefono">
+				<Phone class="icon" />
+				Teléfono
+			</label>
+			<input type="tel" id="telefono" placeholder="Ej. 8112345678" />
+		</div>
+
+		<div class="counter-row">
+			<div class="counter-box">
+				<div class="counter-icon">
+					<UserRound class="icon" />
+				</div>
+				<div class="counter-label">Adultos</div>
+				<div class="counter-controls">
+					<button
+						class="counter-btn btn-minus"
+						type="button"
+						onclick="cambiar('adultos', -1)"
+					>
+						<Minus class="icon" />
+					</button>
+					<div class="counter-value" id="val-adultos">1</div>
+					<button
+						class="counter-btn btn-plus"
+						type="button"
+						onclick="cambiar('adultos', 1)"
+					>
+						<Plus class="icon" />
+					</button>
+				</div>
+			</div>
+
+			<div class="counter-box">
+				<div class="counter-icon">
+					<Baby class="icon" />
+				</div>
+				<div class="counter-label">Niños</div>
+				<div class="counter-controls">
+					<button
+						class="counter-btn btn-minus"
+						type="button"
+						onclick="cambiar('ninos', -1)"
+					>
+						<Minus class="icon" />
+					</button>
+					<div class="counter-value" id="val-ninos">1</div>
+					<button
+						class="counter-btn btn-plus"
+						type="button"
+						onclick="cambiar('ninos', 1)"
+					>
+						<Plus class="icon" />
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<button class="btn-submit" id="confirmBtn" type="button" onclick="confirmar()">
+			<span id="confirmSendIcon">
+				<svg
+					class="icon"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path
+						d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"
+					></path>
+					<path d="m21.854 2.147-10.94 10.939"></path>
+				</svg>
+			</span>
+			<span id="confirmLoaderIcon" style="display: none;">
+				<svg
+					class="icon"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+				</svg>
+			</span>
+			<span id="confirmLockIcon" style="display: none;">
+				<svg
+					class="icon"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+					<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+				</svg>
+			</span>
+			<span id="confirmBtnText">Confirmar asistencia</span>
+		</button>
+	</div>
+
+	<div class="success-box" id="success-box">
+		<div class="success-card">
+			<div class="success-icon-badge">
+				<PartyPopper class="icon" />
+			</div>
+
+			<div class="success-title">¡Confirmación recibida!</div>
+
+			<p class="success-message">
+				Gracias por confirmar tu asistencia. Ya tenemos tu lugar reservado para esta
+				aventura con Spidey.
+			</p>
+			<div class="success-summary" id="summary-text"></div>
+
+			<div class="success-note">
+				<Clock class="icon" />
+				Recuerda: el show comienza a las 4:00 PM
+			</div>
+		</div>
+	</div>
+</section>

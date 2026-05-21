@@ -1,0 +1,317 @@
+---
+import Layout from "@/layouts/index.astro"
+import AudioDock from "@/components/sections/AudioDock.astro"
+import DetailsSection from "@/components/sections/DetailsSection.astro"
+import FloatingMenu from "@/components/sections/FloatingMenu.astro"
+import HeroSection from "@/components/sections/HeroSection.astro"
+import LocationSection from "@/components/sections/LocationSection.astro"
+import RsvpSection from "@/components/sections/RsvpSection.astro"
+---
+
+<Layout pageTitle="Fiesta de Spidey" pageDescription="Fiesta de Spidey">
+	<FloatingMenu />
+	<AudioDock />
+	<div class="web-lines"></div>
+	<HeroSection />
+
+	<main class="container">
+		<header class="header">
+			<h1 class="title">¡Te invitamos a celebrar!</h1>
+			<p class="subtitle">
+				Una aventura increíble junto a <span class="subtitle-span"
+					>Spidey y sus Sorprendentes Amigos</span
+				>
+			</p>
+		</header>
+
+		<DetailsSection />
+		<LocationSection />
+		<RsvpSection />
+
+		<footer class="footer">
+			Powered by
+			<a href="https://raymundosalazar.dev" target="_blank" rel="noopener noreferrer">
+				Raymundo Salazar
+			</a>
+			· <a href="mailto:hola@raymundosalazar.dev">hola@raymundosalazar.dev</a>
+		</footer>
+	</main>
+</Layout>
+
+<script is:inline>
+	const parallaxBg = document.getElementById("parallax-bg")
+	const bannerContent = document.getElementById("banner-content")
+	const bannerEl = document.getElementById("banner")
+
+	function onScroll() {
+		if (!parallaxBg || !bannerContent || !bannerEl) return
+
+		const scrollY = window.scrollY
+		const bannerHeight = bannerEl.offsetHeight
+
+		parallaxBg.style.transform = `translateY(${scrollY * 0.35}px)`
+
+		const sink = Math.min(scrollY * 0.55, bannerHeight * 0.6)
+		const opacity = Math.max(0, 1 - scrollY / (bannerHeight * 0.65))
+
+		bannerContent.style.transform = `translateY(${sink}px)`
+		bannerContent.style.opacity = `${opacity}`
+	}
+
+	window.addEventListener("scroll", onScroll, { passive: true })
+	onScroll()
+
+	const scrollHint = document.getElementById("scrollHint")
+	scrollHint?.addEventListener("click", () => {
+		document.querySelector(".container")?.scrollIntoView({ behavior: "smooth" })
+	})
+
+	const floatingMenu = document.getElementById("floatingMenu")
+
+	function handleFloatingMenu() {
+		if (!bannerEl || !floatingMenu) return
+
+		const bannerHeight = bannerEl.offsetHeight
+
+		if (window.scrollY > bannerHeight * 0.75) {
+			floatingMenu.classList.add("visible")
+		} else {
+			floatingMenu.classList.remove("visible")
+		}
+	}
+
+	window.addEventListener("scroll", handleFloatingMenu, { passive: true })
+	handleFloatingMenu()
+
+	const counts = {
+		adultos: 1,
+		ninos: 1,
+	}
+
+	function cambiar(tipo, delta) {
+		counts[tipo] = Math.max(0, counts[tipo] + delta)
+		const output = document.getElementById(`val-${tipo}`)
+		if (output) {
+			output.textContent = `${counts[tipo]}`
+		}
+	}
+
+	window.cambiar = cambiar
+
+	let confirmacionEnviada = false
+
+	async function confirmar() {
+		if (confirmacionEnviada) return
+
+		const confirmBtn = document.getElementById("confirmBtn")
+		const confirmBtnText = document.getElementById("confirmBtnText")
+
+		const nombre = document.getElementById("nombre")?.value.trim()
+		const telefono = document.getElementById("telefono")?.value.trim()
+
+		if (!nombre) {
+			document.getElementById("nombre")?.focus()
+			return
+		}
+
+		if (!telefono) {
+			document.getElementById("telefono")?.focus()
+			return
+		}
+
+		if (!confirmBtn || !confirmBtnText) return
+
+		const confirmSendIcon = document.getElementById("confirmSendIcon")
+		const confirmLoaderIcon = document.getElementById("confirmLoaderIcon")
+		const confirmLockIcon = document.getElementById("confirmLockIcon")
+
+		const showConfirmState = state => {
+			if (!confirmSendIcon || !confirmLoaderIcon || !confirmLockIcon) return
+
+			confirmSendIcon.style.display = state === "send" ? "" : "none"
+			confirmLoaderIcon.style.display = state === "loading" ? "" : "none"
+			confirmLockIcon.style.display = state === "locked" ? "" : "none"
+		}
+
+		confirmBtn.disabled = true
+		confirmBtn.classList.add("is-loading")
+		showConfirmState("loading")
+		confirmBtnText.textContent = "Enviando..."
+
+		const total = counts.adultos + counts.ninos
+
+		const data = {
+			nombre,
+			telefono,
+			adultos: counts.adultos,
+			ninos: counts.ninos,
+			total,
+		}
+
+		try {
+			await fetch(
+				"https://script.google.com/macros/s/AKfycbzB7fq7Dg2eEIEANxK8KAp5gaXgx9gEZc0b21wP4eRK2ZFjE8AdhOr9NAp2Gl055S5NRA/exec",
+				{
+					method: "POST",
+					mode: "no-cors",
+					body: JSON.stringify(data),
+				}
+			)
+
+			confirmacionEnviada = true
+
+			confirmBtn.classList.remove("is-loading")
+			confirmBtn.classList.add("is-sent")
+			showConfirmState("locked")
+			confirmBtnText.textContent = "Confirmación enviada"
+
+			const summaryText = document.getElementById("summary-text")
+			if (summaryText) {
+				summaryText.innerHTML = `
+					<b>${nombre}</b><br>
+					Tel. ${telefono}<br>
+					${counts.adultos} adulto${counts.adultos !== 1 ? "s" : ""}<br>
+					${counts.ninos} niño${counts.ninos !== 1 ? "s" : ""}<br><br>
+					<small style="color:#aaa">
+						Total: ${total} persona${total !== 1 ? "s" : ""}
+					</small>
+				`
+			}
+
+			document.getElementById("form-content")?.style.setProperty("display", "none")
+			document.getElementById("success-box")?.style.setProperty("display", "block")
+		} catch (error) {
+			console.error(error)
+			confirmBtn.disabled = false
+			confirmBtn.classList.remove("is-loading")
+			showConfirmState("send")
+			confirmBtnText.textContent = "Confirmar asistencia"
+			alert("No pudimos guardar tu confirmación. Inténtalo de nuevo.")
+		}
+	}
+
+	window.confirmar = confirmar
+
+	const bgMusic = document.getElementById("bgMusic")
+	const audioToggle = document.getElementById("audioToggle")
+	const audioVolume = document.getElementById("audioVolume")
+	const volumeToggle = document.getElementById("volumeToggle")
+	const volumeControl = document.querySelector(".volume-control")
+
+	if (bgMusic && audioVolume) {
+		bgMusic.volume = 0.5
+		audioVolume.value = "0.5"
+	}
+
+	function getVolumeIcon() {
+		if (!bgMusic) return "volume-1"
+
+		const volume = Number(bgMusic.volume)
+
+		if (volume === 0) return "volume-x"
+		if (volume < 0.35) return "volume"
+		if (volume < 0.7) return "volume-1"
+		return "volume-2"
+	}
+
+	function updateAudioButton() {
+		if (!bgMusic || !audioToggle || !volumeToggle) return
+
+		const audioPlayIcon = document.getElementById("audioPlayIcon")
+		const audioPauseIcon = document.getElementById("audioPauseIcon")
+		const volumeIconHigh = document.getElementById("volumeIconHigh")
+		const volumeIconMid = document.getElementById("volumeIconMid")
+		const volumeIconLow = document.getElementById("volumeIconLow")
+		const volumeIconMute = document.getElementById("volumeIconMute")
+
+		if (audioPlayIcon && audioPauseIcon) {
+			audioPlayIcon.style.display = bgMusic.paused ? "" : "none"
+			audioPauseIcon.style.display = bgMusic.paused ? "none" : ""
+		}
+
+		if (volumeIconHigh && volumeIconMid && volumeIconLow && volumeIconMute) {
+			const volumeIcon = getVolumeIcon()
+			volumeIconHigh.style.display = volumeIcon === "volume-2" ? "" : "none"
+			volumeIconMid.style.display = volumeIcon === "volume-1" ? "" : "none"
+			volumeIconLow.style.display = volumeIcon === "volume" ? "" : "none"
+			volumeIconMute.style.display = volumeIcon === "volume-x" ? "" : "none"
+		}
+	}
+
+	function removeFirstInteractionListeners() {
+		document.removeEventListener("click", handleFirstInteraction, true)
+		document.removeEventListener("wheel", handleFirstInteraction, true)
+		document.removeEventListener("touchstart", handleFirstInteraction, true)
+		document.removeEventListener("scroll", handleFirstInteraction, true)
+	}
+
+	async function handleFirstInteraction() {
+		if (!bgMusic) return
+
+		removeFirstInteractionListeners()
+
+		try {
+			bgMusic.muted = false
+
+			if (bgMusic.paused) {
+				await bgMusic.play()
+			}
+		} catch (error) {
+			console.debug(error)
+			bgMusic.muted = true
+			try {
+				await bgMusic.play()
+			} catch (fallbackError) {
+				console.debug(fallbackError)
+			}
+		}
+
+		updateAudioButton()
+	}
+
+	document.addEventListener("click", handleFirstInteraction, true)
+	document.addEventListener("wheel", handleFirstInteraction, true)
+	document.addEventListener("touchstart", handleFirstInteraction, true)
+	document.addEventListener("scroll", handleFirstInteraction, true)
+
+	audioToggle?.addEventListener("click", async () => {
+		if (!bgMusic) return
+
+		if (bgMusic.paused) {
+			bgMusic.muted = false
+			try {
+				await bgMusic.play()
+			} catch (error) {
+				console.debug(error)
+			}
+		} else {
+			bgMusic.pause()
+		}
+
+		updateAudioButton()
+	})
+
+	volumeToggle?.addEventListener("click", event => {
+		event.stopPropagation()
+		volumeControl?.classList.toggle("open")
+	})
+
+	audioVolume?.addEventListener("input", () => {
+		if (!bgMusic || !audioVolume) return
+
+		bgMusic.volume = Number(audioVolume.value)
+		updateAudioButton()
+	})
+
+	document.addEventListener("click", event => {
+		if (volumeControl && !volumeControl.contains(event.target)) {
+			volumeControl.classList.remove("open")
+		}
+	})
+
+	bgMusic?.addEventListener("play", updateAudioButton)
+	bgMusic?.addEventListener("pause", updateAudioButton)
+	bgMusic?.addEventListener("volumechange", updateAudioButton)
+
+	updateAudioButton()
+</script>

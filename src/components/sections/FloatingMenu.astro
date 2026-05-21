@@ -1,0 +1,26 @@
+---
+import { CalendarDays, ClipboardCheck, Home, MapPin } from "@lucide/astro"
+---
+
+<nav class="floating-menu" id="floatingMenu" aria-label="Navegación rápida">
+	<div class="floating-menu-inner">
+		<a href="#banner" class="menu-link menu-home" aria-label="Ir al inicio">
+			<Home class="icon" />
+		</a>
+
+		<a href="#detalles" class="menu-link">
+			<CalendarDays class="icon" />
+			Detalles
+		</a>
+
+		<a href="#ubicacion" class="menu-link">
+			<MapPin class="icon" />
+			Lugar
+		</a>
+
+		<a href="#confirmacion" class="menu-link">
+			<ClipboardCheck class="icon" />
+			Confirmar
+		</a>
+	</div>
+</nav>

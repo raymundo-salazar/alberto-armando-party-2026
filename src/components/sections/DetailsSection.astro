@@ -1,0 +1,63 @@
+---
+import { Calendar, Cake, Clock, Sparkles } from "@lucide/astro"
+---
+
+<section class="card" id="detalles">
+	<img class="section-character spidey" src="/spidey.webp" alt="Cachorro decorativo" />
+
+	<div class="card-title">
+		<Cake class="icon" />
+		Celebramos a
+	</div>
+
+	<div class="celebration-names">
+		<div class="birthday-kid">
+			<div class="kid-name">Alberto</div>
+			<div class="kid-age">7 años</div>
+		</div>
+
+		<div class="birthday-kid">
+			<div class="kid-name">Armando</div>
+			<div class="kid-age">4 años</div>
+		</div>
+	</div>
+
+	<div class="event-details-panel">
+		<div class="event-detail-box">
+			<div class="event-detail-icon">
+				<Calendar class="icon" />
+			</div>
+			<div>
+				<div class="event-detail-label">Fecha</div>
+				<div class="event-detail-value">Viernes 4 de Julio</div>
+			</div>
+		</div>
+
+		<div class="event-detail-box">
+			<div class="event-detail-icon">
+				<Clock class="icon" />
+			</div>
+			<div>
+				<div class="event-detail-label">Horario</div>
+				<div class="event-detail-value">3:00 PM - 6:00 PM</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="show-alert" id="show">
+		<div class="show-alert-title">
+			<Sparkles class="icon" />
+			Show especial
+		</div>
+
+		<div class="show-alert-text">
+			Prepárate para mucha diversión, aventuras y sorpresas junto a
+			<span class="show-spidey">Spidey y sus Sorprendentes Amigos</span>.
+		</div>
+
+		<div class="show-time-badge">
+			<Clock class="icon" />
+			Comienza a las 4:00 PM
+		</div>
+	</div>
+</section>

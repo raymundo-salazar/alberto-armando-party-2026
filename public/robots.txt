@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# No publicar sitemap para evitar señales de indexación

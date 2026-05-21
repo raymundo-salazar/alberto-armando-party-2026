@@ -1,0 +1,37 @@
+---
+import { ChevronsDown } from "@lucide/astro"
+---
+
+<section class="parallax-banner" id="banner">
+	<div class="parallax-bg" id="parallax-bg"></div>
+
+	<div class="banner-content" id="banner-content">
+		<img class="banner-logo-top" src="/banner-logo.webp" alt="Logo de la fiesta" />
+
+		<p class="banner-celebrate-text">¡Celebremos juntos a!</p>
+
+		<div class="banner-characters-row">
+			<div class="banner-name-chip">
+				<img class="chip-character" src="/armando.webp" alt="Cachorro invitado principal" />
+				<div class="chip-text">
+					<div class="chip-name">Armando</div>
+					<div class="chip-age">4 años</div>
+				</div>
+			</div>
+
+			<div class="banner-name-chip">
+				<img class="chip-character" src="/spidey.webp" alt="Cachorro secundario" />
+				<div class="chip-text">
+					<div class="chip-name">Alberto</div>
+					<div class="chip-age">7 años</div>
+				</div>
+			</div>
+		</div>
+
+		<button class="scroll-hint" id="scrollHint" type="button">
+			<ChevronsDown class="icon" />
+			Continuar hacia abajo para ver los detalles
+			<ChevronsDown class="icon" />
+		</button>
+	</div>
+</section>

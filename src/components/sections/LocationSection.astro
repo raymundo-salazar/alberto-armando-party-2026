@@ -1,0 +1,49 @@
+---
+import { MapPin, Navigation, Route } from "@lucide/astro"
+---
+
+<section class="card" id="ubicacion">
+	<img class="section-character spin" src="/armando.webp" alt="Cachorro decorativo" />
+
+	<div class="card-title">
+		<MapPin class="icon" />
+		Lugar del Evento
+	</div>
+
+	<div class="location-logo-panel">
+		<img class="funiverse-logo" src="/funiverse-logo.webp" alt="Logo del lugar del evento" />
+	</div>
+
+	<div class="event-detail-box">
+		<div class="event-detail-icon">
+			<Navigation class="icon" />
+		</div>
+
+		<div>
+			<div class="event-detail-label">Dirección</div>
+			<div class="event-detail-value">
+				Av. Rómulo Garza 100 San Nicolás de los Garza, N.L.<br />
+
+				<span class="location-extra">Dentro de Soriana La Fe</span>
+			</div>
+		</div>
+	</div>
+
+	<a
+		class="maps-button"
+		href="https://maps.app.goo.gl/Njv4eqHHMauW5GFK9"
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		<Route class="icon" />
+		Cómo llegar
+	</a>
+
+	<div class="map-wrapper">
+		<iframe
+			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4360.49778855029!2d-100.22005379528738!3d25.722237913633943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662eb0036c039cb%3A0x1a404863cd99e112!2sFuniverse!5e0!3m2!1ses!2smx!4v1779306542851!5m2!1ses!2smx"
+			loading="lazy"
+			referrerpolicy="no-referrer-when-downgrade"
+			allowfullscreen></iframe>
+	</div>
+</section>

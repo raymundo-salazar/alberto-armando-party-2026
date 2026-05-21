@@ -1,0 +1,130 @@
+---
+
+---
+
+<audio id="bgMusic" preload="metadata" loop autoplay muted playsinline>
+	<source src="/bg-music.m4a" type="audio/mp4" />
+</audio>
+
+<div class="audio-player" aria-label="Controles de audio">
+	<button class="audio-btn" id="audioToggle" aria-label="Reproducir o pausar música">
+		<span id="audioPlayIcon">
+			<svg
+				class="icon"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				aria-hidden="true"
+			>
+				<path
+					d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"
+				></path>
+			</svg>
+		</span>
+		<span id="audioPauseIcon" style="display: none;">
+			<svg
+				class="icon"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				aria-hidden="true"
+			>
+				<rect x="14" y="3" width="5" height="18" rx="1"></rect>
+				<rect x="5" y="3" width="5" height="18" rx="1"></rect>
+			</svg>
+		</span>
+	</button>
+
+	<div class="volume-control">
+		<button class="audio-btn volume-btn" id="volumeToggle" aria-label="Controlar volumen">
+			<span id="volumeIconHigh">
+				<svg
+					class="icon"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path
+						d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"
+					></path>
+					<path d="M16 9a5 5 0 0 1 0 6"></path>
+					<path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
+				</svg>
+			</span>
+			<span id="volumeIconMid" style="display: none;">
+				<svg
+					class="icon"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path
+						d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"
+					></path>
+					<path d="M16 9a5 5 0 0 1 0 6"></path>
+				</svg>
+			</span>
+			<span id="volumeIconLow" style="display: none;">
+				<svg
+					class="icon"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path
+						d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"
+					></path>
+				</svg>
+			</span>
+			<span id="volumeIconMute" style="display: none;">
+				<svg
+					class="icon"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path
+						d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"
+					></path>
+					<line x1="22" x2="16" y1="9" y2="15"></line>
+					<line x1="16" x2="22" y1="9" y2="15"></line>
+				</svg>
+			</span>
+		</button>
+
+		<div class="volume-popover" id="volumePopover">
+			<input
+				class="audio-volume vertical"
+				id="audioVolume"
+				type="range"
+				min="0"
+				max="1"
+				step="0.01"
+				value="0.5"
+				aria-label="Volumen"
+			/>
+		</div>
+	</div>
+</div>
