@@ -587,6 +587,35 @@ body::before {
 	gap: 8px;
 }
 
+.sock-notice {
+	margin-top: 20px;
+	background: linear-gradient(135deg, rgba(255, 165, 0, 0.22), rgba(255, 220, 50, 0.18));
+	border: 2px solid rgba(255, 193, 7, 0.45);
+	border-radius: 18px;
+	padding: 20px 22px;
+	text-align: center;
+}
+
+.sock-notice-title {
+	font-family: "Bangers", cursive;
+	font-size: clamp(1.4rem, 5vw, 2rem);
+	color: #ffd54f;
+	text-shadow: 2px 2px 0 #000;
+	letter-spacing: 1px;
+	margin-bottom: 8px;
+}
+
+.sock-notice-text {
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.5;
+}
+
+.sock-notice-text strong {
+	color: #ffd54f;
+}
+
 .map-wrapper {
 	margin-top: 20px;
 	border-radius: 20px;
